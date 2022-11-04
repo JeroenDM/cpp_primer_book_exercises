@@ -14,6 +14,9 @@ inline string& to_string(string& s)
 
 namespace aa {
 
+/** Concatenate a container of stuff that can be converted into a string
+ * into one long string, interleave with a separated string `c`.
+ * **/
 template <typename It>
 std::string join(It start, It end, const std::string& c)
 {
@@ -44,3 +47,10 @@ void my_transform(It in_start, It in_end, It out, Fun f)
 }
 
 } // namespace aa
+
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const std::vector<T>& v)
+{
+    os << aa::join(v.begin(), v.end(), ", ");
+    return os;
+}

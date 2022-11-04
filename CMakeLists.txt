@@ -17,3 +17,5 @@ add_executable(input input.cpp)
 target_precompile_headers(input PRIVATE
     util.h
 )
+
+add_executable(adjacent_ints adjacent_ints.cpp)

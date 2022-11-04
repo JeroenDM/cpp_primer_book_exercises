@@ -3,7 +3,6 @@ Exercise 3.3.3, but using iterators
 
 Write a program to print the size and contents of the vectors.
 */
-#include <algorithm>
 #include <iostream>
 #include <vector>
 using namespace std;
