@@ -19,3 +19,5 @@ target_precompile_headers(input PRIVATE
 )
 
 add_executable(adjacent_ints adjacent_ints.cpp)
+
+add_executable(binary_search binary_search.cpp)
