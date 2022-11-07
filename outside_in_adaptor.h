@@ -10,7 +10,7 @@ namespace _impl {
     struct outside_in_iterator {
         using value_type = typename std::iterator_traits<It>::value_type;
 
-        static It calculate_last_it(It begin, It end)
+        static It midpoint(It begin, It end)
         {
             It last = begin;
             std::advance(last, std::distance(begin, end) / 2);
@@ -20,7 +20,7 @@ namespace _impl {
         outside_in_iterator(It begin, It end)
             : front_ { begin }
             , back_ { end }
-            , last_ { calculate_last_it(begin, end) }
+            , last_ { midpoint(begin, end) }
         {
             --back_;
         }
@@ -71,6 +71,18 @@ namespace _impl {
 
 }
 
+/** Iterate through sequence from the outside towards the middle.
+ *
+ * Example
+ * -------
+ *
+ * vector<int> v {0, 1, 2, 3, 4, 5};
+ *
+ * for (auto x : OutsideInAdaptor(v.begin(), v.end())) cout << x << ", ";
+ *
+ * >> 0, 5, 1, 4, 3
+ *
+ * **/
 template <typename It>
 class OutsideInAdaptor {
 public:
