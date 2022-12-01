@@ -9,9 +9,15 @@ else()
     add_compile_options(-Wall -Wextra -pedantic -Wconversion -Werror)
 endif()
 
+include(cmake/CPM.cmake)
+CPMAddPackage("gh:onqtam/doctest@2.4.9")
+
 add_executable(vector_swap vector_swap.cpp)
 
 add_executable(iterators iterators.cpp)
+
+add_executable(minmax minmax.cpp)
+target_link_libraries(minmax PRIVATE doctest::doctest_with_main)
 
 add_executable(input input.cpp)
 target_precompile_headers(input PRIVATE
