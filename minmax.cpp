@@ -27,10 +27,23 @@ std::pair<I, I> minmax(I first, I last, Compare cmp)
     return { min_el, max_el };
 }
 
+template <typename I>
+std::pair<I, I> minmax(I first, I last)
+{
+    return minmax(first, last, std::less<int>());
+}
+
+template <typename Range>
+auto minmax_r(Range r)
+{
+    return minmax(r.begin(), r.end());
+}
+
 TEST_CASE("constant")
 {
     std::vector v { 2, 2, 2, 2, 2 };
-    const auto& [min, max] = minmax(v.begin(), v.end(), std::less<int>());
+    // const auto& [min, max] = minmax(v.begin(), v.end());
+    const auto& [min, max] = minmax_r(v);
     CHECK_EQ(min, v.begin());
     CHECK_EQ(max, v.end() - 1);
 }
@@ -38,7 +51,7 @@ TEST_CASE("constant")
 TEST_CASE("emtpy")
 {
     std::vector<int> v;
-    const auto& [min, max] = minmax(v.begin(), v.end(), std::less<int>());
+    const auto& [min, max] = minmax(v.begin(), v.end());
     CHECK_EQ(min, v.begin());
     CHECK_EQ(max, v.end());
 }
@@ -46,7 +59,7 @@ TEST_CASE("emtpy")
 TEST_CASE("random")
 {
     std::vector<int> v { 5, 2, 3, 1, 7, 2, 1, 4 };
-    const auto& [min, max] = minmax(v.begin(), v.end(), std::less<int>());
+    const auto& [min, max] = minmax(v.begin(), v.end());
     CHECK_EQ(min, v.begin() + 3);
     CHECK_EQ(max, v.begin() + 4);
 }
@@ -54,7 +67,7 @@ TEST_CASE("random")
 TEST_CASE("increasing")
 {
     std::vector<int> v { 1, 2, 3, 4, 5 };
-    const auto& [min, max] = minmax(v.begin(), v.end(), std::less<int>());
+    const auto& [min, max] = minmax(v.begin(), v.end());
     CHECK_EQ(min, v.begin());
     CHECK_EQ(max, v.end() - 1);
 }
